@@ -16,16 +16,16 @@ ActiveRecord::Schema.define(version: 20141205172800) do
   create_table "countries", id: false, force: true do |t|
     t.string   "name"
     t.string   "code"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "visited",    default: false
   end
 
   create_table "currencies", id: false, force: true do |t|
     t.string   "name"
     t.string   "code"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "country_id"
     t.decimal  "weight"
     t.decimal  "collector_value"
