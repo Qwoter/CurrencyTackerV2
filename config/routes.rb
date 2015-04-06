@@ -1,4 +1,11 @@
 CurrencyTracker::Application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :countries, :except => [:new, :destroy]
+      resources :currencies, :only => [:index, :show]
+    end
+  end
+
   root :to => "currencies#index"
   
   resources :countries, :except => [:new, :destroy]
