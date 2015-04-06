@@ -12,6 +12,8 @@ end
 
 group :test do
   gem 'cucumber-rails', :require => false
+  gem 'rspec'
+  gem 'factory_girl'
 end
 
 group :assets do
@@ -19,3 +21,4 @@ group :assets do
 end
 
 gem 'jquery-rails', '~> 2.2.0'
+gem 'jbuilder'
