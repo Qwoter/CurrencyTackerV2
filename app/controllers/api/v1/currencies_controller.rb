@@ -13,10 +13,11 @@ module Api
       end
 
       def create
-        @currency = Currency.new(currency_params)
+        pars = { :user_id => @user.id }.merge currency_params
+        @currency = Currency.new(pars)
 
         if @currency.save
-          render 'show', status: :created
+          head :created
         else
           @errors = @currency.errors.full_messages * "<br />"
           render template: 'shared/error.json.jbuilder', status: :unprocessable_entity
@@ -45,7 +46,7 @@ module Api
 
       # DRY.
       def set_currency
-        @currency = Currency.where({ code: params[:id], user_id: @user.id })
+        @currency = Currency.where({ code: params[:id], user_id: @user.id }).first
       end
 
       # Set constrait on parameters that we get from internetz.

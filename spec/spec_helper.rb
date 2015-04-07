@@ -15,23 +15,14 @@ RSpec.configure do |config|
   end
 
   config.before(:suite) do
-    DatabaseCleaner.clean_with :truncation
-    DatabaseCleaner.clean_with :transaction
+    begin
+      DatabaseCleaner.start
+      FactoryGirl.lint
+    ensure
+      DatabaseCleaner.clean
+    end
   end
 
-  config.after(:each) do
-    ActionMailer::Base.deliveries.clear
-  end
-
-  config.around(:each, type: :feature, js: true) do |ex|
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.start
-    self.use_transactional_fixtures = false
-    ex.run
-    self.use_transactional_fixtures = true
-    DatabaseCleaner.clean
-  end
-  
   config.include FactoryGirl::Syntax::Methods
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"

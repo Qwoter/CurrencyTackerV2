@@ -13,10 +13,11 @@ module Api
       end
 
       def create
-        @country = Country.new(country_params)
+        pars = { :user_id => @user.id }.merge country_params
+        @country = Country.new(pars)
 
         if @country.save
-          render 'show', status: :created
+          head :created
         else
           @errors = @country.errors.full_messages * "<br />"
           render template: 'shared/error.json.jbuilder', status: :unprocessable_entity
@@ -51,7 +52,7 @@ module Api
 
       # DRY.
       def set_country
-        @country = Country.where({ code: params[:id], user_id: @user.id })
+        @country = Country.where({ code: params[:id], user_id: @user.id }).first
       end
 
       # Set constrait on parameters that we get from internetz.
