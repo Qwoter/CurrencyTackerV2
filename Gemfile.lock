@@ -1,10 +1,4 @@
 GIT
-  remote: git@github.com:DatabaseCleaner/database_cleaner.git
-  revision: bb608dd3ac6b149cbe92a658d3f8abbebfe82f3f
-  specs:
-    database_cleaner (1.4.1)
-
-GIT
   remote: https://github.com/bearded-nemesis/heroku-rglpk.git
   revision: 760859ce23c6e9d253324a584da6ee351700c48f
   specs:
@@ -68,6 +62,7 @@ GEM
       mime-types (>= 1.16, < 3)
       nokogiri (~> 1.5)
       rails (>= 3, < 5)
+    database_cleaner (1.4.1)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.5.0)
@@ -181,7 +176,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   cucumber-rails
-  database_cleaner!
+  database_cleaner
   factory_girl_rails
   heroku-rglpk!
   jbuilder
