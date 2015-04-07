@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407035422) do
+ActiveRecord::Schema.define(version: 20150407055278) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,9 @@ ActiveRecord::Schema.define(version: 20150407035422) do
     t.integer  "user_id"
   end
 
+  add_index "countries", ["code", "user_id"], name: "country_code_user_id_idx", using: :btree
+  add_index "countries", ["user_id"], name: "country_user_id_idx", using: :btree
+
   create_table "currencies", id: false, force: :cascade do |t|
     t.string   "name"
     t.string   "code"
@@ -35,6 +38,10 @@ ActiveRecord::Schema.define(version: 20150407035422) do
     t.float    "collector_value"
     t.integer  "user_id"
   end
+
+  add_index "currencies", ["code", "user_id"], name: "currency_code_user_id_idx", using: :btree
+  add_index "currencies", ["country_id"], name: "currency_country_id_idx", using: :btree
+  add_index "currencies", ["user_id"], name: "currency_user_id_idx", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "api_key"
