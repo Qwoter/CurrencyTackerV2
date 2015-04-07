@@ -38,7 +38,7 @@ module Api
       end
 
       def country_list
-        currencies_with_countries = Currency.joins(:country).where("countries.visited = ? AND currencies.user_id = ?", 0, @user.id)
+        currencies_with_countries = Currency.joins(:country).where("countries.visited = ? AND currencies.user_id = ?", false, @user.id)
         @country_list = Gomory.calculate(currencies_with_countries, params[:max_weight])
         render template: "api/v1/countries/country_list"
       end

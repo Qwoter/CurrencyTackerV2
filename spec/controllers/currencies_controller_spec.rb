@@ -11,7 +11,7 @@ RSpec.describe Api::V1::CurrenciesController, :type => :controller do
         create(:user)
         create(:currency, code: 'AFA')
 
-        request.headers["Api-Key"] = "f651dde722b0e21c291843b4f2f63d16"
+        request.headers["X-Api-Key"] = "f651dde722b0e21c291843b4f2f63d16"
         xhr :get, :index, format: :json
       end
 

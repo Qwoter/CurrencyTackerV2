@@ -1,8 +1,8 @@
-ruby '2.1.2'
+ruby '2.1.5'
 
 source 'http://rubygems.org'
 
-gem 'rails', '4.1.8'
+gem 'rails'
 # gem 'sqlite3'
 
 group :development do
@@ -11,6 +11,8 @@ end
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
+  gem 'database_cleaner'
 end
 
 group :test do

@@ -1,7 +1,7 @@
 class AddRelationCountriesCurrencies < ActiveRecord::Migration
   def self.up
-    add_column :currencies, :user_id, :string
-    add_column :countries, :user_id, :string
+    add_column :currencies, :user_id, :integer
+    add_column :countries, :user_id, :integer
   end
 
   def self.down

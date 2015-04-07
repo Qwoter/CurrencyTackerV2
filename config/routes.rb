@@ -1,11 +1,11 @@
 CurrencyTracker::Application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
-      resources :countries, :except => [:new, :destroy] do 
+      resources :countries, :except => [:new, :edit] do 
         match 'country_list/:max_weight',   :action => :country_list, :as => :country_list, :via => [:get], :on => :collection
         # get 'max_value/:max_weight', :on => :collection
       end
-      resources :currencies, :only => [:index, :show]
+      resources :currencies, :except => [:new, :edit]
     end
   end
   
