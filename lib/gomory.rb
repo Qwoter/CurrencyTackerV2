@@ -58,14 +58,16 @@ module Gomory
       p.simplex()
       p.mip()
       z = p.obj.get
+      w = 0
 
       result = []
       cols.each_with_index do |el, i|
         if el.mip_val > 0
-          result << [el.mip_val, data[i], data[i].country]
+          result << [{ amount: el.mip_val }, data[i], data[i].country]
+          w += data[i].weight * el.mip_val
         end
       end
 
-    result << z
+    result << { max_value: z, max_weight: w }
   end
 end
