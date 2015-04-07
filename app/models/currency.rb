@@ -7,6 +7,8 @@ class Currency < ActiveRecord::Base
   belongs_to :country
   belongs_to :user
 
+  scope :find_first, -> (code, user_id) { where({ code: code, user_id: user_id }).first }
+
   def self.collected
     all.select {|currency| currency.collected? }
   end

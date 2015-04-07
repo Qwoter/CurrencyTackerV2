@@ -11,4 +11,6 @@ class Country < ActiveRecord::Base
 
   scope :visited, -> { where(visited: true) }
   scope :not_visited, -> { where(visited: false) }
+  scope :find_first, -> (code, user_id) { where({ code: code, user_id: user_id }).first }
+  scope :visited_currencies_with_countries, -> (user_id) { joins(:country).where("countries.visited = ? AND currencies.user_id = ?", false, user_id) }
 end

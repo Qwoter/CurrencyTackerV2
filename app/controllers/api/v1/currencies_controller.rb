@@ -46,7 +46,7 @@ module Api
 
       # DRY.
       def set_currency
-        @currency = Currency.where({ code: params[:id], user_id: @user.id }).first
+        @currency = Currency.find_first(params[:id], @user.id)
       end
 
       # Set constrait on parameters that we get from internetz.

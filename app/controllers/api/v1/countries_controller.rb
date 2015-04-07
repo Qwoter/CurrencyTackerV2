@@ -39,7 +39,7 @@ module Api
       end
 
       def country_list
-        currencies_with_countries = Currency.joins(:country).where("countries.visited = ? AND currencies.user_id = ?", false, @user.id)
+        currencies_with_countries = Currency.visited_currencies_with_countries(@user.id)
         @country_list = Gomory.calculate(currencies_with_countries, params[:max_weight])
         render template: "api/v1/countries/country_list"
       end
@@ -52,7 +52,7 @@ module Api
 
       # DRY.
       def set_country
-        @country = Country.where({ code: params[:id], user_id: @user.id }).first
+        @country = Country.find_first(params[:id], @user.id)
       end
 
       # Set constrait on parameters that we get from internetz.
