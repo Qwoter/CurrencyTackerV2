@@ -4,16 +4,17 @@ CurrencyTracker
 Heroku:
 -------
 For connection we should provide Api Key.
-
+```bash
 curl -H "X-Api-Key: f651dde722b0e21c291843b4f2f63d16" http://currency-tacker-v2.herokuapp.com/api/v1/currencies/ZWD
 
-curl -H "X-Api-Key: f651dde722b0e21c291843b4f2f63d16" 
-
-http://currency-tacker-v2.herokuapp.com/api/v1/countries/country_list/18
+curl -H "X-Api-Key: f651dde722b0e21c291843b4f2f63d16" http://currency-tacker-v2.herokuapp.com/api/v1/countries/country_list/18
+```
 
 Same for local instance.
 
+```bash
 http://localhost:3000/api/v1/countries/country_list/1802
+```
 
 API:
 ----
@@ -100,7 +101,7 @@ Country D Currency D 10 110
 steps:
 
 1. Calculate value / weight for each currency.
-ex. 5 12.5 3.(3) 11
+ex. 5 | 12.5 | 3.(3) | 11
 
 2. Creat function which we need to Maximize.
 ex. 5*A + 12.5*B + 3.(3)*C + 11 * D = MAX (A,B..D are amount of our currency, coefficients are value / weight for each currency)
