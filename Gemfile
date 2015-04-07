@@ -10,9 +10,7 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
-  gem 'database_cleaner'
 end
 
 group :test do
@@ -22,11 +20,6 @@ group :test do
   gem 'factory_girl_rails'
 end
 
-group :test, :development do
-  gem 'mysql2'
-  gem 'database_cleaner'
-end
-
 group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
@@ -34,3 +27,5 @@ end
 gem 'jquery-rails', '~> 2.2.0'
 gem 'jbuilder'
 gem 'heroku-rglpk', :git => 'https://github.com/bearded-nemesis/heroku-rglpk.git', :require => 'rglpk'
+gem 'pg'
+gem 'database_cleaner'

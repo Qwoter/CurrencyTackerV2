@@ -13,27 +13,30 @@
 
 ActiveRecord::Schema.define(version: 20150407035422) do
 
-  create_table "countries", id: false, force: true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "countries", id: false, force: :cascade do |t|
     t.string   "name"
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "visited",    default: false
-    t.string   "user_id"
+    t.integer  "user_id"
   end
 
-  create_table "currencies", id: false, force: true do |t|
+  create_table "currencies", id: false, force: :cascade do |t|
     t.string   "name"
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "country_id"
-    t.float    "weight",          limit: 24
-    t.float    "collector_value", limit: 24
-    t.string   "user_id"
+    t.float    "weight"
+    t.float    "collector_value"
+    t.integer  "user_id"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "api_key"
     t.string   "name"
     t.datetime "created_at"
