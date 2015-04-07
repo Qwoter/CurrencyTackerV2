@@ -1,64 +1,62 @@
 module Api
   module V1
     class CountriesController < ApplicationController
-      # GET /countries
-      # GET /countries.xml
+      before_action :set_reservation, only: [:show, :update, :destroy]
+      before_action :setup_errors
+
       def index
         @countries = Country.all
-
-        respond_to do |format|
-          format.html # index.html.erb
-          format.xml  { render :xml => @countries }
-        end
       end
 
-      # GET /countries/1
-      # GET /countries/1.xml
       def show
         @country = Country.find(params[:id])
-
-        respond_to do |format|
-          format.html # show.html.erb
-          format.xml  { render :xml => @country }
-        end
       end
 
-      # GET /countries/1/edit
-      def edit
-        @country = Country.find(params[:id])
-      end
-
-      # POST /countries
-      # POST /countries.xml
       def create
-        @country = Country.new(params[:country].permit(:visited,:name,:code))
+        @country = Country.new(country_params)
 
-        respond_to do |format|
-          if @country.save
-            format.html { redirect_to(@country, :notice => 'Country was successfully created.') }
-            format.xml  { render :xml => @country, :status => :created, :location => @country }
-          else
-            format.html { render :action => "new" }
-            format.xml  { render :xml => @country.errors, :status => :unprocessable_entity }
-          end
+        if @country.save
+          render 'show', status: :created
+        else
+          @errors = @country.errors.full_messages * "<br />"
+          render template: 'shared/error.json.jbuilder', status: :unprocessable_entity
         end
       end
 
-      # PUT /countries/1
-      # PUT /countries/1.xml
       def update
-        @country = Country.find(params[:id])
+        if @country.update(country_params)
+          head :no_content
+        else
+          @errors = @country.errors.full_messages * "<br />"
+          render template: 'shared/error.json.jbuilder', status: :unprocessable_entity
+        end
+      end
 
-        respond_to do |format|
-          if @country.update_attributes(params[:country].permit(:visited,:name,:code))
-            format.html { redirect_to(@country, :notice => 'Country was successfully updated.') }
-            format.xml  { head :ok }
-          else
-            format.html { render :action => "edit" }
-            format.xml  { render :xml => @country.errors, :status => :unprocessable_entity }
-          end
+      def destroy
+        @country.destroy
+        head :no_content
+      end
+
+      private
+      # Setup errors.
+      def setup_errors
+        @errors = ""
+      end
+
+      # DRY.
+      def set_country
+        @country = Country.find(params[:id])
+      end
+
+      # Set constrait on parameters that we get from internetz.
+      def country_params
+        if params[:country].blank?
+          {}
+        else
+          params.require(:country).permit(:name, :code, :visited)
         end
       end
     end
+
   end
 end

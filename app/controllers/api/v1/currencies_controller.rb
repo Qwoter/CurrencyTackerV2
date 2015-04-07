@@ -1,10 +1,8 @@
 module Api
   module V1
     class CurrenciesController < ApplicationController
-      before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+      before_action :set_reservation, only: [:show, :update, :destroy]
       before_action :setup_errors
-      # We don't use this cool rails feature to verify token parameter from client side form request so we disable it.
-      skip_before_filter :verify_authenticity_token
 
       def index
         @currencies = Currency.all

@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-RSpec.describe Api::V1::CurrenciesController, :type => :controller do
+RSpec.describe Api::V1::CountriesController, :type => :controller do
   render_views
 
   describe "index" do
     subject(:results) { JSON.parse(response.body) }
 
-    context "when there are currencies" do
+    context "when there are countries" do
       before do
-        create(:currency, code: 'AFA')
+        create(:country, name: 'Afghanistan, Islamic State of')
 
         xhr :get, :index, format: :json
       end
@@ -22,7 +22,7 @@ RSpec.describe Api::V1::CurrenciesController, :type => :controller do
       end
 
       it "should include 'Afghani'" do
-        expect(results.map {|el| el["code"]}).to include('AFA')
+        expect(results.map {|el| el["name"]}).to include('Afghanistan, Islamic State of')
       end
     end
   end
