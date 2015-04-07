@@ -1,8 +1,8 @@
 module Api
   module V1
     class CountriesController < ApplicationController
-      before_action :set_reservation, only: [:show, :update, :destroy]
       before_action :authenticate
+      before_action :set_country, only: [:show, :update, :destroy]
       before_action :setup_errors
 
       def index
@@ -10,7 +10,6 @@ module Api
       end
 
       def show
-        @country = Country.find(params[:id])
       end
 
       def create
@@ -39,7 +38,7 @@ module Api
       end
 
       def country_list
-        currencies_with_countries = Currency.joins(:country).where("countries.visited = ?", 0)
+        currencies_with_countries = Currency.joins(:country).where("countries.visited = ? AND currencies.user_id = ?", 0, @user.id)
         @country_list = Gomory.calculate(currencies_with_countries, params[:max_weight])
         render template: "api/v1/countries/country_list"
       end
@@ -52,7 +51,7 @@ module Api
 
       # DRY.
       def set_country
-        @country = Country.find(params[:id])
+        @country = Country.where({ code: params[:id], user_id: @user.id })
       end
 
       # Set constrait on parameters that we get from internetz.

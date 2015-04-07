@@ -1,1 +1,1 @@
-json.partial! 'currency', currency: @currency
+json.partial! @currency, partial: 'currency', as: :currency

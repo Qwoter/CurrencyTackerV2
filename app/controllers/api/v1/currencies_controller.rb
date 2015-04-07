@@ -1,8 +1,8 @@
 module Api
   module V1
     class CurrenciesController < ApplicationController
-      before_action :set_reservation, only: [:show, :update, :destroy]
       before_action :authenticate
+      before_action :set_currency, only: [:show, :update, :destroy]
       before_action :setup_errors
 
       def index
@@ -10,7 +10,6 @@ module Api
       end
 
       def show
-        @currency = Currency.find(params[:id])
       end
 
       def create
@@ -46,7 +45,7 @@ module Api
 
       # DRY.
       def set_currency
-        @currency = Currency.find(params[:id])
+        @currency = Currency.where({ code: params[:id], user_id: @user.id })
       end
 
       # Set constrait on parameters that we get from internetz.
