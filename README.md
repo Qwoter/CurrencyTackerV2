@@ -13,7 +13,7 @@ curl -H "X-Api-Key: f651dde722b0e21c291843b4f2f63d16" http://currency-tacker-v2.
 Same for local instance.
 
 ```bash
-http://localhost:3000/api/v1/countries/country_list/1802
+curl -H "X-Api-Key: f651dde722b0e21c291843b4f2f63d16" http://localhost:3000/api/v1/countries/country_list/1802
 ```
 
 API:
