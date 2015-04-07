@@ -1,4 +1,6 @@
-Country.create!([
+alice = User.create!({name: "Alice", api_key: "f651dde722b0e21c291843b4f2f63d16"})
+
+countries = [
   {name: "Afghanistan, Islamic State of", code: "af", visited: false},
   {name: "Albania", code: "al", visited: false},
   {name: "Algeria", code: "dz", visited: false},
@@ -243,8 +245,11 @@ Country.create!([
   {name: "Zaire", code: "zr", visited: false},
   {name: "Zambia", code: "zm", visited: false},
   {name: "Zimbabwe", code: "zw", visited: false}
-])
-Currency.create!([
+]
+
+Country.create!(countries.map {|el| el[:user_id] = alice.id; el})
+
+currencies = [
   {name: "Afghani", code: "AFA", country_id: "af", weight: "3.59144658850593", collector_value: "7.820516121919"},
   {name: "Lek", code: "ALL", country_id: "al", weight: "2.74041828894157", collector_value: "1.74565844472991"},
   {name: "Dinar", code: "DZD", country_id: "dz", weight: "4.02363006175925", collector_value: "1.80104808337808"},
@@ -399,4 +404,6 @@ Currency.create!([
   {name: "Dinar", code: "YUN", country_id: "yu", weight: "0.568300281191555", collector_value: "7.51190411189943"},
   {name: "Kwacha", code: "ZMK", country_id: "zm", weight: "0.328882051046029", collector_value: "3.69015985147484"},
   {name: "Dollar", code: "ZWD", country_id: "zw", weight: "4.20805197629694", collector_value: "4.73132862378861"}
-])
+]
+
+Currency.create!(currencies.map {|el| el[:user_id] = alice.id; el})

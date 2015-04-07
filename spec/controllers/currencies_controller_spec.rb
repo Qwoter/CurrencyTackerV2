@@ -8,8 +8,10 @@ RSpec.describe Api::V1::CurrenciesController, :type => :controller do
 
     context "when there are currencies" do
       before do
+        create(:user)
         create(:currency, code: 'AFA')
 
+        request.headers["Api-Key"] = "f651dde722b0e21c291843b4f2f63d16"
         xhr :get, :index, format: :json
       end
 

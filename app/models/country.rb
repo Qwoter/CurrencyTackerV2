@@ -5,6 +5,7 @@ class Country < ActiveRecord::Base
   validates :code, uniqueness: true
 
   has_many :currencies
+  belongs_to :user
 
   accepts_nested_attributes_for :currencies, :allow_destroy => true
 

@@ -5,6 +5,7 @@ class Currency < ActiveRecord::Base
   validates :code, uniqueness: true
 
   belongs_to :country
+  belongs_to :user
 
   def self.collected
     all.select {|currency| currency.collected? }

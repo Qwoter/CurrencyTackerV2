@@ -2,6 +2,7 @@ module Api
   module V1
     class CountriesController < ApplicationController
       before_action :set_reservation, only: [:show, :update, :destroy]
+      before_action :authenticate
       before_action :setup_errors
 
       def index
