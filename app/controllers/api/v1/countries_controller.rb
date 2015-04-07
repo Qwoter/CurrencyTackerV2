@@ -37,6 +37,12 @@ module Api
         head :no_content
       end
 
+      def country_list
+        currencies_with_countries = Currency.joins(:country).where("countries.visited = ?", 0)
+        @country_list = Gomory.calculate(currencies_with_countries, params[:max_weight])
+        render template: "api/v1/countries/country_list"
+      end
+
       private
       # Setup errors.
       def setup_errors
@@ -53,7 +59,7 @@ module Api
         if params[:country].blank?
           {}
         else
-          params.require(:country).permit(:name, :code, :visited)
+          params.require(:country).permit(:name, :code, :visited, :max_weight)
         end
       end
     end

@@ -31,3 +31,4 @@ end
 
 gem 'jquery-rails', '~> 2.2.0'
 gem 'jbuilder'
+gem 'heroku-rglpk', :git => 'https://github.com/bearded-nemesis/heroku-rglpk.git', :require => 'rglpk'
