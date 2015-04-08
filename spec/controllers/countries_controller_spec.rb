@@ -137,4 +137,29 @@ RSpec.describe Api::V1::CountriesController, :type => :controller do
       end
     end
   end
+
+  describe "country_list" do
+    subject(:results) { JSON.parse(response.body) }
+
+    context "when getting unvisited countries" do
+      before do
+        @user = create(:user)
+        @currency_a = create(:a, user: @user)
+        @currency_b = create(:b, user: @user)
+        @currency_c = create(:c, user: @user)
+        @currency_d = create(:d, user: @user)
+
+        request.headers["X-Api-Key"] = @user.api_key
+        xhr :get, :country_list, format: :json, max_weight: 16
+      end
+
+      it 'should 200' do
+        expect(response.status).to eq(200)
+      end
+
+      it 'should see updated changes' do
+        expect(response.body).to include("\"amount\":4.0},{\"name\":\"B\"")
+      end
+    end
+  end
 end
