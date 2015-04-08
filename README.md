@@ -121,3 +121,4 @@ TODO
 * Mor API methods.
 * Weight precision can be slightly improved by using BigDecimal.
 * Error handling can be improved
+* Create many_to_many relation between users and countries so we can actually visit countries with different users
